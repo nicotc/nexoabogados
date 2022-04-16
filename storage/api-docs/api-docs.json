@@ -1,0 +1,453 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "nexoabogados",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://nexoabogados.test/"
+        }
+    ],
+    "paths": {
+        "/api/v1": {},
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "description": "Login de usuario en el sistema",
+                "operationId": "5db09a35f965c6ca7529ed3c3cae8e21",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registro de usuario",
+                "description": "Registro de usuario en el sistema",
+                "operationId": "48e49e48019e8b141753cb515a26100b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Name",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Salir del sistema",
+                "description": "Salir del sistema",
+                "operationId": "8f1a443d39c3bf383f851fbb51253c64",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/panel/list_active_subscription  || /api/v1/panel/list_inactive_subscription": {
+            "get": {
+                "tags": [
+                    "Panel"
+                ],
+                "summary": "Mostrar suscripciones",
+                "description": "Esta ruta list_active_subscription muestra todas las suscripciones activas y list_inactive_subscription las inactivas",
+                "operationId": "index-Subscription",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "pagina a mostrar por defecto es 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "resultados por pagina por defecto 20",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos las suscripciones."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/v1/panel/show_subscription/{id}": {
+            "get": {
+                "tags": [
+                    "Panel"
+                ],
+                "summary": "Mostrar una suscripción",
+                "description": "Mostrar una suscripción",
+                "operationId": "show-Subscription",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de Subscription",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar una suscripción."
+                    },
+                    "default": {
+                        "description": "No se encuentra el suscripción con id."
+                    }
+                }
+            }
+        },
+        "/api/v1/panel/cancel_subscription": {
+            "post": {
+                "tags": [
+                    "Panel"
+                ],
+                "summary": "Cancelar una suscripción",
+                "description": "Cancelar una suscripción",
+                "operationId": "cancel-Subscription",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "id de Subscription",
+                                        "type": "integer"
+                                    },
+                                    "reason": {
+                                        "description": "motivo de cancelacion",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subscription array."
+                    },
+                    "default": {
+                        "description": "No se encuentra el suscripción con id"
+                    }
+                }
+            }
+        },
+        "/api/v1/panel/attempt_Subscription/{id}/{no?}": {
+            "get": {
+                "tags": [
+                    "Panel"
+                ],
+                "summary": "intentar un suscripción",
+                "description": "Intentar una suscripción  | 'id' requerido | 'no?' opcional  por defecto 'no'. En caso de querer intentarlo sin espera, agregar cualquier valor",
+                "operationId": "attempt-Subscription",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de Subscription",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "intentar un Subscription."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/v1/abogados/create_subscription": {
+            "post": {
+                "tags": [
+                    "Abogados"
+                ],
+                "summary": "Crear una suscripción",
+                "description": "Crear una suscripción",
+                "operationId": "create-Subscription",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_user": {
+                                        "description": "id de usuario",
+                                        "type": "integer"
+                                    },
+                                    "id_plan": {
+                                        "description": "id de plan",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Crear una suscripción."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/v1/abogados/actual_subscription": {
+            "get": {
+                "tags": [
+                    "Abogados"
+                ],
+                "summary": "Obtener la suscripción actual",
+                "description": "Obtener la suscripción actual",
+                "operationId": "actual-Subscription",
+                "responses": {
+                    "200": {
+                        "description": "Obtener la suscripción actual."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/v1/abogados/update_subscription": {
+            "put": {
+                "tags": [
+                    "Abogados"
+                ],
+                "summary": "Actualizar una suscripción",
+                "description": "Actualizar una suscripción",
+                "operationId": "update-Subscription",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_subscription": {
+                                        "description": "id de Subscription",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un Subscription."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/v1/abogados/delete_subscription": {
+            "delete": {
+                "tags": [
+                    "Abogados"
+                ],
+                "summary": "Eliminar una suscripción",
+                "description": "Eliminar una suscripción",
+                "operationId": "delete-Subscription",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_subscription": {
+                                        "description": "id de Subscription",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Eliminar una suscripción."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
