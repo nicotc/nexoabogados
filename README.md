@@ -96,7 +96,7 @@ Panel
     get /api/v1/panel/list_inactive_subscription
     get /api/v1/panel/show_subscription/{id}
     post /api/v1/panel/cancel_subscription
-    get attempt_subscription/{id_subscription}/{directa?}
+    get /api/v1/panel/attempt_subscription/{id_subscription}/{directa?}
 
 ## Thunder  
 
