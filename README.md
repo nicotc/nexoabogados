@@ -18,7 +18,7 @@
 
  Clonar el repositorio
     
-    git clone git@github.com:nicotc/base_api-laravel-8.git nexoabogados
+    git clone git@github.com:nicotc/nexoabogados.git nexoabogados
 
 Ir al directorio
 
@@ -100,7 +100,7 @@ Panel
 
 ## Thunder  
 
-    🏆 thunder-collection_nexoabogados.json
+    thunder-collection_nexoabogados.json
 
 
 ## Léeme
